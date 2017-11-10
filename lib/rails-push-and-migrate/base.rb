@@ -1,7 +1,7 @@
 module RailsPushAndMigrate
   class Base
     attr_accessor :branch, :remote
-    def initialize(branch, remote)
+    def initialize(remote, branch)
       @branch = branch
       @remote = remote
     end

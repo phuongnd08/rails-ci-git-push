@@ -11,7 +11,7 @@ class RapamCLI < Thor
 
   desc "dokku REMOTE BRANCH", "Deploy to dokku REMOTE using BRANCH (default master)"
   def dokku(remote, branch = "master")
-    RailsPushAndMigrate::Heroku.new(remote, branch).run
+    RailsPushAndMigrate::Dokku.new(remote, branch).run
   end
 end
 
