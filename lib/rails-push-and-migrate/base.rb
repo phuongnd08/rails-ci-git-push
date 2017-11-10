@@ -1,16 +1,9 @@
-
-require "active_support"
-require "active_support/core_ext"
-require "thor"
-require "fileutils"
-
 module RailsPushAndMigrate
   class Base
-    attr_accessor :branch, :remote, :on_ci
-    def initialize(branch, remote, on_ci)
+    attr_accessor :branch, :remote
+    def initialize(branch, remote)
       @branch = branch
       @remote = remote
-      @on_ci = on_ci
     end
 
     def remote_branch
@@ -42,7 +35,6 @@ module RailsPushAndMigrate
       diff_files.select {|f| f.include? "app/assets"}.any?
     end
 
-
     def git_push_cmd
       "git push #{remote} #{branch}:#{remote_branch}"
     end
@@ -51,9 +43,20 @@ module RailsPushAndMigrate
       raise NotImplementedError
     end
 
+    def print_and_execute(cmd)
+      puts "Executing #{cmd}"
+      system cmd
+    end
+
+    def print_and_execute!(cmd)
+      unless print_and_execute(cmd)
+        raise "Failed to execute #{cmd}"
+      end
+    end
+
     def run
-      system git_push_cmd
-      migrate_cmd
+      print_and_execute! git_push_cmd
+      print_and_execute!(migrate_cmd) if has_migration?
     end
   end
 end

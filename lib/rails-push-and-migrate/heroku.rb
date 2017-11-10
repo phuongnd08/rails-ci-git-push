@@ -3,10 +3,9 @@ require_relative 'base'
 module RailsPushAndMigrate
   class Heroku < Base
     attr_accessor :app
-    def initialize(branch, app, on_ci)
+    def initialize(branch, app)
       @branch = branch
       @app = app
-      @on_ci = on_ci
     end
 
     def remote

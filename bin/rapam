@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+require 'rails-push-and-migrate'
+
+class RapamCLI < Thor
+  desc "heroku APP BRANCH", "Deploy to heroku APP using BRANCH (default master)"
+  def heroku(app, branch = "master")
+    RailsPushAndMigrate::Heroku.new(app, branch).run
+  end
+
+  desc "dokku REMOTE BRANCH", "Deploy to dokku REMOTE using BRANCH (default master)"
+  def dokku(remote, branch = "master")
+    RailsPushAndMigrate::Heroku.new(remote, branch).run
+  end
+end
+
+RapamCLI.start
