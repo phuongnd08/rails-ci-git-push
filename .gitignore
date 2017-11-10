@@ -1,0 +1,8 @@
+profiles/
+.capistrano/
+TODO
+tags
+.s3config
+tmp/
+.redislab.yml
+chrome_debug.log
