@@ -4,6 +4,7 @@ module RailsPushAndMigrate
     def initialize(remote, branch)
       @branch = branch
       @remote = remote
+      diff_files
     end
 
     def remote_branch
